@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "ExamTeacherMarks";
+}
+
+<div class="row text-center">
+    <div class="col-sm">
+        <h1 class="text-center mb-3">Оцінки студентів за екзамен "@ViewBag.ExamName"</h1>
+        <table class="table">
+            <thead class="bg-info text-light">
+                <tr>
+                    <th>
+                        Ім'я
+                    </th>
+                    <th>
+                        Прізвище
+                    </th>
+                    <th>
+                        Оцінка
+                    </th>
+                    <th>
+                        Дії
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Mark mark in ViewBag.Marks)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => mark.User.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => mark.User.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => mark.MarkValue)
+                        </td>
+                        <td>
+                            <form method="post" asp-controller="Home" asp-action="DeleteMark" asp-route-id="@ViewBag.ExamId" asp-route-markid="@mark.MarkId">
+                                <button class="btn bg-danger" type="submit">-</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

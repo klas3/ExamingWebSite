@@ -1,0 +1,32 @@
+﻿@model Education.ViewModel.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<link rel="stylesheet" href="~/css/Account.css" />
+
+<h1 class="text-center m-3 w-75 mx-auto">Увійдіть до свого аккаунту щоб продовжити</h1>
+
+<form class="loginForm" method="post" enctype="multipart/form-data" asp-action="Login">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label asp-for="Login">Логін</label>
+        <input asp-for="Login" class="form-control">
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Пароль</label>
+        <input asp-for="Password" type="password" class="form-control">
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="form-group form-check">
+        <input asp-for="RememberMe" type="checkbox" class="form-check-input">
+        <label asp-for="RememberMe" class="form-check-label">Запам'ятати мене</label>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<div class="m-auto text-center">
+    <a asp-controller="Account" asp-action="Register">Зареєструватися</a>
+</div>

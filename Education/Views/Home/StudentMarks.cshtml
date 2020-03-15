@@ -1,0 +1,36 @@
+﻿@model List<Mark>
+
+@{
+    ViewData["Title"] = "StudentMarks";
+}
+
+<div class="row text-center">
+    <div class="col-sm">
+        <h1 class="text-center mb-3">Оцінки студента @ViewBag.FirstName @ViewBag.LastName</h1>
+        <table class="table">
+            <thead class="bg-info text-light">
+                <tr>
+                    <th>
+                        Екзамен
+                    </th>
+                    <th>
+                        Оцінка
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Mark mark in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => mark.Exam.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => mark.MarkValue)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

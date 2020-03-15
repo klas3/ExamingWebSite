@@ -1,0 +1,124 @@
+﻿@model Education.ViewModel.ExamViewModel
+
+@{
+    ViewData["Title"] = "Exams";
+}
+<link href="~/css/Account.css" rel="stylesheet" />
+<link href="~/css/forms.css" rel="stylesheet" />
+
+<div class="mt-auto mb-auto">
+    @if (User.IsInRole("Student"))
+    {
+        <h1 class="text-center mt-3">Доступні екзамени</h1>
+    }
+    else
+    {
+        <h1 class="text-center mt-3">Ваші екзамени</h1>
+    }
+
+    @if (User.IsInRole("Teacher"))
+    {
+        <form method="post" asp-controller="Home" asp-action="Exams">
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div class="text-lg-right mb-3">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                    + Новий екзамен
+                </button>
+            </div>
+
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Новий екзамен</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label asp-for="NewExamName" class="col-form-label"></label>
+                                <input type="text" class="form-control" asp-for="NewExamName">
+                                <span asp-validation-for="NewExamName"></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                            <button type="submit" class="btn btn-primary">Створити</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <form method="get" asp-controller="Home" asp-action="StudentMarks">
+            <div class="text-lg-right mb-3">
+                <button type="submit" class="btn btn-success">
+                    Переглянути оцінки
+                </button>
+            </div>
+        </form>
+    }
+    <div class="text-center">
+        @foreach (var exam in Model.Exams)
+        {
+            <div class="d-flex flex-row justify-content-around m-2">
+                <div class="exams">
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <form method="get" asp-controller="Home" asp-action="ExamQuestions" asp-route-id="@exam.ExamId">
+                            <button class="btn btn-info w-100 action-button" type="submit">
+                                @Html.DisplayFor(modelItem => exam.Name)
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="get" asp-controller="Home" asp-action="ExamPassing" asp-route-id="@exam.ExamId">
+                            <button class="btn btn-info w-100 action-button" type="submit">
+                                @Html.DisplayFor(modelItem => exam.Name)
+                            </button>
+                        </form>
+                    }
+                </div>
+                @if(User.IsInRole("Teacher"))
+                {
+                    <div class="d-flex flex-row">
+                        <form method="post" asp-controller="Home" asp-action="UpdateExam" asp-route-examid="@exam.ExamId">
+                            <button type="button" class="btn btn-warning mr-2 action-button" data-toggle="modal" data-target="#editExam_@exam.ExamId">/</button>
+
+                            <div class="modal fade" id="editExam_@exam.ExamId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Редагувати екзамен</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" asp-for="NewExamName" value="@exam.Name">
+                                                <span asp-validation-for="NewExamName"></span>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+                                            <button type="submit" class="btn btn-primary">Оновити</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form method="post" asp-controller="Home" asp-action="DeleteExam" asp-route-examid="@exam.ExamId">
+                            <button type="submit" class="btn btn-danger action-button">-</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

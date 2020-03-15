@@ -1,0 +1,26 @@
+﻿@model Education.ViewModel.ExamPassingViewModel
+
+@{
+    ViewData["Title"] = "ExamPassing";
+}
+
+<h1 class="text-center">Здача екзамену "@ViewBag.ExamName"</h1>
+
+<form method="post" asp-controller="Home" asp-action="ExamPassing" asp-route-id="@ViewBag.ExamId">
+    @for (int i = 0; i < ViewBag.Questions.Count; i++)
+    {
+        <label class="label-size">@ViewBag.Questions[i].AskedQuestion</label>
+        <div class="option-size d-flex flex-column ml-5">
+            @for (int j = 0; j < ViewBag.Questions[i].AnswerOptions.Count; j++)
+            {
+                <input asp-for="Options[i][j].AnswerOptionId" value="@ViewBag.Options[i][j].AnswerOptionId" class="d-none">
+                <label><input type="checkbox" asp-for="Options[i][j].IsOptionRight" class="mr-2" />@ViewBag.Options[i][j].Option</label>
+            }
+        </div>
+    }
+    <button type="submit" class="btn btn-success m-3">Закінчити</button>
+</form>
+
+@section Scripts {
+    <script src="~/js/LeavingConfirmation.js"></script>
+}

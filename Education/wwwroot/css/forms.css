@@ -1,0 +1,25 @@
+﻿.label-size {
+    font-size: 28px;
+}
+
+.option-size {
+    font-size: 20px;
+}
+
+.center-vertically {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.exams {
+    width: 90%;
+}
+
+nav {
+    font-size: 20px;
+}
+
+.action-button {
+    font-size: 18px;
+}

@@ -1,0 +1,53 @@
+﻿@model Education.ViewModel.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<link rel="stylesheet" href="~/css/Account.css" />
+
+<h1 class="text-center">Реєстрація</h1>
+
+<form class="loginForm" method="post" enctype="multipart/form-data" asp-action="Register">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" type="text" class="form-control col-xs-4">
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" type="text" class="form-control col-xs-4">
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Login"></label>
+        <input asp-for="Login" type="text" class="form-control col-xs-4">
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" class="form-control col-xs-4">
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control">
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Role"></label>
+        <select asp-for="Role" class="form-control">
+            <option>Студент</option>
+            <option>Викладач</option>
+        </select>
+        <span asp-validation-for="Role"></span>
+    </div>
+    <div class="form-check form-group">
+        <input asp-for="RememberMe" type="checkbox" class="form-check-input">
+        <label asp-for="RememberMe" class="form-check-label"></label>
+    </div>
+    <button type="submit" class="btn btn-success">
+        Зареєструватися
+    </button>
+</form>
