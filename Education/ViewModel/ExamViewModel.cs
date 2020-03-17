@@ -9,6 +9,7 @@ namespace Education.ViewModel
 {
     public class ExamViewModel
     {
+        [Display(Name = "Новий екзамен")]
         public string NewExamName { get; set; }
         public List<Exam> Exams { get; set; }
     }

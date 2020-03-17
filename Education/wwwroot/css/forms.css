@@ -23,3 +23,8 @@ nav {
 .action-button {
     font-size: 18px;
 }
+
+.checkbox-large {
+    width: 20px;
+    height: 20px;
+}

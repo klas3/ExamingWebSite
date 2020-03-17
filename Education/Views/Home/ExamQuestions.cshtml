@@ -69,10 +69,10 @@
     @foreach (var question in Model.Questions)
     {
         <div class="d-flex flex-row justify-content-between">
-            <label class="label-size">@question.AskedQuestion</label>
+            <label class="label-size overflow-hidden w-75" style="word-wrap: break-word;">@question.AskedQuestion</label>
             <div class="d-flex flex-row">
                 <form method="post" asp-controller="Home" asp-action="AddOption" asp-route-questionid="@question.QuestionId" asp-route-examid="@ViewBag.ExamId" asp-route-editing="@ViewBag.IsEditing">
-                    <button type="button" class="btn btn-success mr-2 action-button" data-toggle="modal" data-target="#addOption_@question.QuestionId">
+                    <button type="button" class="btn btn-success mr-2 action-button text-nowrap" data-toggle="modal" data-target="#addOption_@question.QuestionId">
                         + Варіант
                     </button>
 
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="IsOptionRight" class="col-form-label"></label>
-                                        <input type="checkbox" class="form-control" asp-for="IsOptionRight">
+                                        <input type="checkbox" class="form-control checkbox-large" asp-for="IsOptionRight">
                                         <span asp-validation-for="IsOptionRight"></span>
                                     </div>
                                 </div>
